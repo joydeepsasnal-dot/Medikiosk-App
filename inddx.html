@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MediKiosk | Smart Healthcare</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Leaflet Map -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">✚</div>
+
+            <div>
+                <h2>MediKiosk</h2>
+                <span>SMART HEALTHCARE</span>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#map-section">Find Care</a>
+            <a href="#ai">AI Assistant</a>
+            <a href="#about">About</a>
+        </nav>
+
+        <button class="emergency-btn" onclick="openEmergency()">
+            🚨 Emergency
+        </button>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="badge">
+                ● AI-POWERED HEALTHCARE PLATFORM
+            </div>
+
+            <h1>
+                Healthcare
+                <span>Within Reach.</span>
+            </h1>
+
+            <p>
+                Find nearby hospitals, pharmacies, clinics and diagnostic
+                centres while getting reliable health information through
+                our AI-powered assistant.
+            </p>
+
+            <!-- Search -->
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="locationSearch"
+                    placeholder="Search city, area or healthcare facility..."
+                >
+
+                <button onclick="searchLocation()">
+                    🔍 Search
+                </button>
+
+            </div>
+
+            <button class="location-btn" onclick="useMyLocation()">
+                📍 Use My Current Location
+            </button>
+
+        </div>
+
+
+        <div class="hero-card">
+
+            <div class="floating-card card-one">
+                <span>🏥</span>
+                <div>
+                    <strong>Healthcare</strong>
+                    <small>Nearby facilities</small>
+                </div>
+            </div>
+
+            <div class="health-circle">
+
+                <div class="circle-inner">
+                    <span>✚</span>
+                    <strong>24/7</strong>
+                    <small>Healthcare Access</small>
+                </div>
+
+            </div>
+
+            <div class="floating-card card-two">
+                <span>🤖</span>
+                <div>
+                    <strong>AI Assistant</strong>
+                    <small>Health information</small>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= QUICK STATS ================= -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+            <span>🏥</span>
+            <div>
+                <strong id="hospitalCount">1,250+</strong>
+                <small>Healthcare Facilities</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span>💊</span>
+            <div>
+                <strong>5,000+</strong>
+                <small>Medicine Information</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span>📍</span>
+            <div>
+                <strong>100+</strong>
+                <small>Cities Covered</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span>🌐</span>
+            <div>
+                <strong>3</strong>
+                <small>Languages</small>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ================= SERVICES ================= -->
+
+    <section class="section" id="services">
+
+        <div class="section-heading">
+
+            <span>WHAT WE OFFER</span>
+
+            <h2>
+                Everything You Need,
+                <strong>In One Place.</strong>
+            </h2>
+
+            <p>
+                MediKiosk brings essential healthcare discovery and
+                information services together on one platform.
+            </p>
+
+        </div>
+
+
+        <div class="services-grid">
+
+            <div class="service-card" onclick="scrollToMap('Hospital')">
+
+                <div class="service-icon blue">🏥</div>
+
+                <h3>Find Hospitals</h3>
+
+                <p>
+                    Locate nearby hospitals and emergency healthcare
+                    facilities.
+                </p>
+
+                <span class="service-link">
+                    Find nearby →
+                </span>
+
+            </div>
+
+
+            <div class="service-card" onclick="scrollToMap('Pharmacy')">
+
+                <div class="service-icon green">💊</div>
+
+                <h3>Find Pharmacies</h3>
+
+                <p>
+                    Discover pharmacies and medicine-related information
+                    near you.
+                </p>
+
+                <span class="service-link">
+                    Find nearby →
+                </span>
+
+            </div>
+
+
+            <div class="service-card" onclick="scrollToMap('Clinic')">
+
+                <div class="service-icon purple">🩺</div>
+
+                <h3>Find Clinics</h3>
+
+                <p>
+                    Search for clinics and healthcare specialists by
+                    location.
+                </p>
+
+                <span class="service-link">
+                    Find nearby →
+                </span>
+
+            </div>
+
+
+            <div class="service-card" onclick="scrollToMap('Diagnostic')">
+
+                <div class="service-icon orange">🧪</div>
+
+                <h3>Diagnostics</h3>
+
+                <p>
+                    Find diagnostic centres and laboratory services.
+                </p>
+
+                <span class="service-link">
+                    Find nearby →
+                </span>
+
+            </div>
+
+
+            <div class="service-card" onclick="openMedicine()">
+
+                <div class="service-icon pink">💉</div>
+
+                <h3>Medicine Information</h3>
+
+                <p>
+                    Search medicines and learn about their general
+                    information and precautions.
+                </p>
+
+                <span class="service-link">
+                    Search medicine →
+                </span>
+
+            </div>
+
+
+            <div class="service-card" onclick="scrollToAI()">
+
+                <div class="service-icon cyan">🤖</div>
+
+                <h3>AI Health Assistant</h3>
+
+                <p>
+                    Ask health-related questions and receive easy-to-
+                    understand educational information.
+                </p>
+
+                <span class="service-link">
+                    Ask AI →
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MAP ================= -->
+
+    <section class="map-section" id="map-section">
+
+        <div class="section-heading">
+
+            <span>SMART HEALTHCARE MAP</span>
+
+            <h2>
+                Find Healthcare
+                <strong>Near You.</strong>
+            </h2>
+
+            <p>
+                Search a city or area and explore healthcare facilities
+                around that location.
+            </p>
+
+        </div>
+
+
+        <div class="map-container">
+
+            <div class="map-sidebar">
+
+                <div class="map-search">
+
+                    <input
+                        id="mapSearch"
+                        type="text"
+                        placeholder="Search location..."
+                    >
+
+                    <button onclick="searchMap()">
+                        🔍
+                    </button>
+
+                </div>
+
+
+                <div class="filter-title">
+                    Filter facilities
+                </div>
+
+
+                <button
+                    class="filter active"
+                    onclick="filterFacilities('All', this)"
+                >
+                    <span>🔵</span>
+                    All Facilities
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="filterFacilities('Hospital', this)"
+                >
+                    <span>🏥</span>
+                    Hospitals
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="filterFacilities('Pharmacy', this)"
+                >
+                    <span>💊</span>
+                    Pharmacies
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="filterFacilities('Clinic', this)"
+                >
+                    <span>🩺</span>
+                    Clinics
+                </button>
+
+                <button
+                    class="filter"
+                    onclick="filterFacilities('Diagnostic', this)"
+                >
+                    <span>🧪</span>
+                    Diagnostic Centres
+                </button>
+
+
+                <div class="nearby-title">
+                    Nearby Facilities
+                </div>
+
+                <div id="facilityList"></div>
+
+            </div>
+
+
+            <div id="map"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= AI ASSISTANT ================= -->
+
+    <section class="ai-section" id="ai">
+
+        <div class="ai-info">
+
+            <div class="ai-badge">
+                ✨ AI HEALTH ASSISTANT
+            </div>
+
+            <h2>
+                Your Health Questions,
+                <span>Simplified.</span>
+            </h2>
+
+            <p>
+                Ask general health-information questions in simple language.
+                MediKiosk helps you understand health topics and guides you
+                toward appropriate healthcare services.
+            </p>
+
+            <div class="ai-features">
+
+                <div>
+                    ✓ Easy-to-understand information
+                </div>
+
+                <div>
+                    ✓ Multilingual support
+                </div>
+
+                <div>
+                    ✓ Healthcare facility recommendations
+                </div>
+
+                <div>
+                    ✓ Safety-focused responses
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="chat-box">
+
+            <div class="chat-header">
+
+                <div class="ai-avatar">
+                    🤖
+                </div>
+
+                <div>
+                    <strong>MediKiosk AI</strong>
+                    <small>● Online</small>
+                </div>
+
+            </div>
+
+
+            <div class="chat-messages" id="chatMessages">
+
+                <div class="message bot">
+                    Hello! 👋 I'm MediKiosk AI.
+
+                    <br><br>
+
+                    I can provide general health information and help you
+                    find appropriate healthcare services.
+
+                    <br><br>
+
+                    How can I help you today?
+                </div>
+
+            </div>
+
+
+            <div class="suggestions">
+
+                <button onclick="askSuggestion('What is diabetes?')">
+                    What is diabetes?
+                </button>
+
+                <button onclick="askSuggestion('How can I find a hospital?')">
+                    Find a hospital
+                </button>
+
+                <button onclick="askSuggestion('What is first aid?')">
+                    First aid
+                </button>
+
+            </div>
+
+
+            <div class="chat-input">
+
+                <input
+                    id="chatInput"
+                    type="text"
+                    placeholder="Ask a health question..."
+                    onkeypress="handleChatKey(event)"
+                >
+
+                <button onclick="sendMessage()">
+                    ➤
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= EMERGENCY ================= -->
+
+    <section class="emergency-section">
+
+        <div>
+
+            <span>🚨 EMERGENCY ASSISTANCE</span>
+
+            <h2>
+                Need Help Quickly?
+            </h2>
+
+            <p>
+                Find nearby emergency healthcare facilities and important
+                emergency contacts.
+            </p>
+
+        </div>
+
+        <button onclick="openEmergency()">
+            Emergency Help →
+        </button>
+
+    </section>
+
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="about" id="about">
+
+        <div class="section-heading">
+
+            <span>ABOUT MEDIKIOSK</span>
+
+            <h2>
+                Technology For
+                <strong>Accessible Healthcare.</strong>
+            </h2>
+
+            <p>
+                MediKiosk is designed to bridge the gap between people and
+                healthcare resources by combining AI, location intelligence,
+                multilingual interaction and healthcare discovery.
+            </p>
+
+        </div>
+
+
+        <div class="about-grid">
+
+            <div>
+                <span class="big-number">01</span>
+                <h3>Discover</h3>
+                <p>
+                    Find healthcare facilities based on location and service.
+                </p>
+            </div>
+
+            <div>
+                <span class="big-number">02</span>
+                <h3>Understand</h3>
+                <p>
+                    Get simple, accessible health information using AI.
+                </p>
+            </div>
+
+            <div>
+                <span class="big-number">03</span>
+                <h3>Connect</h3>
+                <p>
+                    Connect people with appropriate healthcare resources.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-logo">
+            ✚ MediKiosk
+        </div>
+
+        <p>
+            AI-powered healthcare accessibility platform.
+        </p>
+
+        <div class="footer-bottom">
+            © 2026 MediKiosk. SIH Project Prototype.
+        </div>
+
+    </footer>
+
+
+    <!-- Emergency Modal -->
+
+    <div class="modal" id="emergencyModal">
+
+        <div class="modal-content">
+
+            <button
+                class="close-btn"
+                onclick="closeEmergency()"
+            >
+                ×
+            </button>
+
+            <div class="emergency-icon">
+                🚨
+            </div>
+
+            <h2>Emergency Assistance</h2>
+
+            <p>
+                If this is a real emergency, contact your local emergency
+                services immediately.
+            </p>
+
+            <div class="emergency-numbers">
+
+                <div>
+                    <strong>112</strong>
+                    <span>National Emergency</span>
+                </div>
+
+                <div>
+                    <strong>108</strong>
+                    <span>Ambulance</span>
+                </div>
+
+            </div>
+
+            <button
+                class="modal-action"
+                onclick="useMyLocation()"
+            >
+                📍 Find Nearby Emergency Facilities
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- Medicine Modal -->
+
+    <div class="modal" id="medicineModal">
+
+        <div class="modal-content medicine-modal">
+
+            <button
+                class="close-btn"
+                onclick="closeMedicine()"
+            >
+                ×
+            </button>
+
+            <h2>💊 Medicine Information</h2>
+
+            <p>
+                Search for general medicine information.
+            </p>
+
+            <input
+                id="medicineSearch"
+                class="medicine-input"
+                type="text"
+                placeholder="Enter medicine name..."
+            >
+
+            <button
+                class="modal-action"
+                onclick="searchMedicine()"
+            >
+                Search
+            </button>
+
+            <div id="medicineResult"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Leaflet JS -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    </script>
+
+    <script>
+        window.MEDIKIOSK_API_URL = window.location.protocol === "file:" ||
+            window.location.port === "5500"
+            ? "http://127.0.0.1:8000"
+            : "";
+    </script>
+    <script src="script.js"></script>
+
+</body>
+</html>
